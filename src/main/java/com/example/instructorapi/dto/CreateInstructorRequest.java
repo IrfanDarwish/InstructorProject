@@ -12,13 +12,13 @@ public class CreateInstructorRequest {
     @NotBlank(message = "Specialization is required")
     public String specialization;
 
-    @Min(value = 0, message = "Years of experience must be a positive number    ")
+    @Min(value = 0, message = "Years of experience must be a positive number. 0 or more.")
     public int yearsOfExperience;
 
     public CreateInstructorRequest() {
 
     }
-    
+
     public String getName() {
         return name;
     }
