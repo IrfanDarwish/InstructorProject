@@ -5,9 +5,9 @@ public class InstructorModel {
     private String name;
     private String email;
     private String specialization;
-    private String yearsOfExperience;
+    private int yearsOfExperience;
 
-    public InstructorModel(String name, String email, String specialization, String yearsOfExperience) {
+    public InstructorModel(String name, String email, String specialization, int yearsOfExperience) {
         this.name = name;
         this.email = email;
         this.specialization = specialization;
@@ -26,7 +26,7 @@ public class InstructorModel {
         return specialization;
     }
 
-    public String getYearsOfExperience() {
+    public int getYearsOfExperience() {
         return yearsOfExperience;
     }
 
@@ -42,7 +42,7 @@ public class InstructorModel {
         this.specialization = specialization;
     }
 
-    public void setYearsOfExperience(String yearsOfExperience) {
+    public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }
 
