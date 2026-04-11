@@ -12,6 +12,8 @@ import com.example.instructorapi.dto.CreateInstructorRequest;
 import com.example.instructorapi.model.InstructorModel;
 import com.example.instructorapi.service.InstructorService;
 
+import jakarta.validation.Valid;
+
 
 //mock controller for testing purposes
 @RestController
@@ -31,7 +33,7 @@ public class InstructorController {
     
 
     @PostMapping
-    public InstructorModel createInstructor(@RequestBody CreateInstructorRequest request) {
+    public InstructorModel createInstructor(@Valid @RequestBody CreateInstructorRequest request) {
         return instructorService.createInstructor(request);
     }
     
