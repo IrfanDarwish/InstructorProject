@@ -3,7 +3,6 @@ package com.example.instructorapi.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -52,8 +51,12 @@ public class InstructorService {
         return instructorRepository.findBySpecializationContainingIgnoreCase(specialization);
     }
 
-    public Page<InstructorModel> findPageBySize(int page, int size) {
-        return instructorRepository.findAll(PageRequest.of(page, size));
+    public Page<InstructorModel> getPagedInstructors(String specialization,Pageable pageable) {
+        if (specialization != null && !specialization.isEmpty()) {
+            return instructorRepository.findBySpecializationContainingIgnoreCase(specialization, pageable);
+        }
+        return instructorRepository.findAll(pageable);
     }
+
     
 }
