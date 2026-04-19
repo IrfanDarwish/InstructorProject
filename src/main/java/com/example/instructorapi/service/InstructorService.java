@@ -1,30 +1,44 @@
 package com.example.instructorapi.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.instructorapi.dto.CreateInstructorRequest;
 import com.example.instructorapi.model.InstructorModel;
+import com.example.instructorapi.repository.InstructorRepository;
 
 @Service
 public class InstructorService {
 
-    public final List<InstructorModel> instructors = new ArrayList<>();
+    public final InstructorRepository instructorRepository;
 
-    public List<InstructorModel> getAllInstructors() {
-        return instructors;
+    public InstructorService(InstructorRepository instructorRepository) {
+        this.instructorRepository = instructorRepository;
     }
 
-    public InstructorModel createInstructor(CreateInstructorRequest request) {
-        InstructorModel instructor = new InstructorModel(
-            request.getName(),
-            request.getEmail(),
-            request.getSpecialization(),
-            request.getYearsOfExperience());
-        instructors.add(instructor);
-        return instructor;
+    public List<InstructorModel> getAllInstructors() {
+        return instructorRepository.findAll();
+    }
+
+    public InstructorModel getInstructorsById(String id) {
+        return instructorRepository.findById(id).orElseThrow(() -> new RuntimeException("Instructor not found"));
+    }
+
+    public InstructorModel createInstructor(InstructorModel instructor) {
+        return instructorRepository.save(instructor);
+    }
+
+    public InstructorModel updateInstructor(String id,InstructorModel updated) {
+        InstructorModel existing = getInstructorsById(id);
+        existing.setName(updated.getName());
+        existing.setEmail(updated.getEmail());
+        existing.setSpecialization(updated.getSpecialization());
+        existing.setYearsOfExperience(updated.getYearsOfExperience());
+        return instructorRepository.save(existing);
+    }
+
+    public void deleteInstructor(String id) {
+        instructorRepository.deleteById(id);
     }
     
 }
