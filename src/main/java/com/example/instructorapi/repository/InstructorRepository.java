@@ -2,6 +2,8 @@ package com.example.instructorapi.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.example.instructorapi.model.InstructorModel;
@@ -13,4 +15,5 @@ public interface InstructorRepository extends MongoRepository<InstructorModel, S
     List<InstructorModel> findByNameContainingIgnoreCase(String keyword);
 
     List<InstructorModel> findBySpecializationContainingIgnoreCase(String specialization);
+
 }

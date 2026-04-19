@@ -2,6 +2,7 @@ package com.example.instructorapi.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +31,15 @@ public class InstructorController {
     }
 
     @GetMapping
-    public List<InstructorModel> getAllInstructors(@RequestParam(required = false) String specialization) {
+    public List<InstructorModel> getAllInstructors(
+        @RequestParam(required = false) String specialization, 
+        @RequestParam(required = false) Integer page,
+        @RequestParam(required = false) Integer size
+    ) {
         if (specialization != null) {
             return instructorService.searchBySpecialization(specialization);
+        } if (page != null && size != null) {
+            return instructorService.findPageBySize(page, size).getContent();  
         }
         return instructorService.getAllInstructors();
     }
@@ -61,5 +68,7 @@ public class InstructorController {
     public List<InstructorModel> searchInstructorByName(@RequestParam String keyword){
         return instructorService.searchInstructorByName(keyword);
     }
+
+
 
 }
