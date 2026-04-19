@@ -40,5 +40,9 @@ public class InstructorService {
     public void deleteInstructor(String id) {
         instructorRepository.deleteById(id);
     }
+
+    public List<InstructorModel> searchInstructorByName(String keyword){
+        return instructorRepository.findByNameContaining(keyword);
+    }
     
 }

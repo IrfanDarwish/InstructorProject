@@ -9,4 +9,6 @@ import com.example.instructorapi.model.InstructorModel;
 public interface InstructorRepository extends MongoRepository<InstructorModel, String>{
 
     List<InstructorModel> findByName(String name);
+
+    List<InstructorModel> findByNameContaining(String keyword);
 }
