@@ -1,11 +1,20 @@
 package com.example.instructorapi.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "instructors")
 public class InstructorModel {
+
+    @Id
+    private String id;
 
     private String name;
     private String email;
     private String specialization;
     private int yearsOfExperience;
+
+    public InstructorModel() {}
 
     public InstructorModel(String name, String email, String specialization, int yearsOfExperience) {
         this.name = name;
@@ -14,6 +23,14 @@ public class InstructorModel {
         this.yearsOfExperience = yearsOfExperience;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }
