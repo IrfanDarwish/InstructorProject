@@ -42,7 +42,11 @@ public class InstructorService {
     }
 
     public List<InstructorModel> searchInstructorByName(String keyword){
-        return instructorRepository.findByNameContaining(keyword);
+        return instructorRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
+    public List<InstructorModel> searchBySpecialization(String specialization){
+        return instructorRepository.findBySpecializationContainingIgnoreCase(specialization);
     }
     
 }

@@ -2,7 +2,6 @@ package com.example.instructorapi.controller;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators.In;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +30,10 @@ public class InstructorController {
     }
 
     @GetMapping
-    public List<InstructorModel> getAllInstructors() {
+    public List<InstructorModel> getAllInstructors(@RequestParam(required = false) String specialization) {
+        if (specialization != null) {
+            return instructorService.searchBySpecialization(specialization);
+        }
         return instructorService.getAllInstructors();
     }
     

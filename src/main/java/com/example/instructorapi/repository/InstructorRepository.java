@@ -10,5 +10,7 @@ public interface InstructorRepository extends MongoRepository<InstructorModel, S
 
     List<InstructorModel> findByName(String name);
 
-    List<InstructorModel> findByNameContaining(String keyword);
+    List<InstructorModel> findByNameContainingIgnoreCase(String keyword);
+
+    List<InstructorModel> findBySpecializationContainingIgnoreCase(String specialization);
 }
