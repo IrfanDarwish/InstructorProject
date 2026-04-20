@@ -2,6 +2,8 @@ package com.example.instructorapi.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import com.example.instructorapi.repository.InstructorRepository;
 public class InstructorService {
 
     public final InstructorRepository instructorRepository;
+    private static final Logger logger = LoggerFactory.getLogger(InstructorService.class);
 
     public InstructorService(InstructorRepository instructorRepository) {
         this.instructorRepository = instructorRepository;
@@ -44,6 +47,16 @@ public class InstructorService {
     }
 
     public Page<InstructorModel> getPagedInstructors(String keyword, String specialization,Pageable pageable) {
+        
+        logger.info("===Query Log===");
+        logger.info("Keyword: {}", keyword);
+        logger.info("Specialization: {}", specialization);
+        logger.info("Page Number: {}", pageable.getPageNumber());
+        logger.info("Page Size: {}", pageable.getPageSize());
+        logger.info("Sort: {}", pageable.getSort());
+        logger.info("===============");
+        
+        
         if (keyword != null && specialization != null) {
             return instructorRepository.findByNameContainingIgnoreCaseAndSpecializationContainingIgnoreCase(keyword, specialization, pageable);
         }
