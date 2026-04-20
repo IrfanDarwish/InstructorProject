@@ -12,10 +12,9 @@ public interface InstructorRepository extends MongoRepository<InstructorModel, S
 
     List<InstructorModel> findByName(String name);
 
-    List<InstructorModel> findByNameContainingIgnoreCase(String keyword);
-
-    List<InstructorModel> findBySpecializationContainingIgnoreCase(String specialization);
+    Page<InstructorModel> findByNameContainingIgnoreCase(String keyword, Pageable pageable);
 
     Page<InstructorModel> findBySpecializationContainingIgnoreCase(String specialization, Pageable pageable);
 
+    Page<InstructorModel> findByNameContainingIgnoreCaseAndSpecializationContainingIgnoreCase(String keyword, String specialization, Pageable pageable);
 }

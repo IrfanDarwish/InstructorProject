@@ -43,15 +43,13 @@ public class InstructorService {
         instructorRepository.deleteById(id);
     }
 
-    public List<InstructorModel> searchInstructorByName(String keyword){
-        return instructorRepository.findByNameContainingIgnoreCase(keyword);
-    }
-
-    public List<InstructorModel> searchBySpecialization(String specialization){
-        return instructorRepository.findBySpecializationContainingIgnoreCase(specialization);
-    }
-
-    public Page<InstructorModel> getPagedInstructors(String specialization,Pageable pageable) {
+    public Page<InstructorModel> getPagedInstructors(String keyword, String specialization,Pageable pageable) {
+        if (keyword != null && specialization != null) {
+            return instructorRepository.findByNameContainingIgnoreCaseAndSpecializationContainingIgnoreCase(keyword, specialization, pageable);
+        }
+        if (keyword != null){
+            return instructorRepository.findByNameContainingIgnoreCase(keyword, pageable);
+        }
         if (specialization != null && !specialization.isEmpty()) {
             return instructorRepository.findBySpecializationContainingIgnoreCase(specialization, pageable);
         }

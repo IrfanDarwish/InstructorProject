@@ -1,7 +1,5 @@
 package com.example.instructorapi.controller;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,10 +31,11 @@ public class InstructorController {
 
     @GetMapping
     public Page<InstructorModel> getAllInstructors(
+        @RequestParam(required = false) String keyword,
         @RequestParam(required = false) String specialization, 
         Pageable pageable) 
         {
-            return instructorService.getPagedInstructors(specialization, pageable);
+            return instructorService.getPagedInstructors(keyword, specialization, pageable);
         }
     
     @GetMapping("/{id}")
@@ -58,12 +57,4 @@ public class InstructorController {
     public void deleteInstructor(@PathVariable String id) {
         instructorService.deleteInstructor(id);
     }
-
-    @GetMapping("/search")
-    public List<InstructorModel> searchInstructorByName(@RequestParam String keyword){
-        return instructorService.searchInstructorByName(keyword);
-    }
-
-
-
 }
