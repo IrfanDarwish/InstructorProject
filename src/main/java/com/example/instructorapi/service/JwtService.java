@@ -19,10 +19,10 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secret}")
+    @Value("${app.jwt.secret}")
     private String jwtSecret;
 
-    @Value("${jwt.expiration-ms}")
+    @Value("${app.jwt.expiration-ms}")
     private long jwtExpirationMs;
 
     private SecretKey getSigningKey() {
