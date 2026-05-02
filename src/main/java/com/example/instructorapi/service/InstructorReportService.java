@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
+import com.example.instructorapi.dto.InstructorSpecializationSummary;
 import com.example.instructorapi.dto.InstructorStatusSummary;
 
 @Service
@@ -28,6 +29,18 @@ public class InstructorReportService {
         
         return mongoTemplate
         .aggregate(aggregation, "instructors", InstructorStatusSummary.class)
+        .getMappedResults();
+    }
+
+    public List<InstructorSpecializationSummary> countInstructorsBySpecialization() {
+        Aggregation aggregation = newAggregation(
+            group("specialization").count().as("totalInstructors"),
+            project("totalInstructors").and("_id").as("specialization"),
+            sort(Sort.Direction.ASC, "specialization")
+        );
+        
+        return mongoTemplate
+        .aggregate(aggregation, "instructors", InstructorSpecializationSummary.class)
         .getMappedResults();
     }
 }
