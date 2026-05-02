@@ -18,7 +18,6 @@ import com.example.instructorapi.service.InstructorService;
 import jakarta.validation.Valid;
 
 
-//mock controller for testing purposes
 @RestController
 @RequestMapping("/api/v1/instructors")
 public class InstructorController {

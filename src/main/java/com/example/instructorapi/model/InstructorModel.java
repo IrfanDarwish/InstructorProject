@@ -16,14 +16,17 @@ public class InstructorModel {
     @Indexed
     private String specialization;
     private int yearsOfExperience;
+    private String status;
 
     public InstructorModel() {}
 
-    public InstructorModel(String name, String email, String specialization, int yearsOfExperience) {
+    public InstructorModel(String id,String name, String email, String specialization, int yearsOfExperience, String status) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.specialization = specialization;
         this.yearsOfExperience = yearsOfExperience;
+        this.status = status;
     }
 
 
@@ -67,4 +70,11 @@ public class InstructorModel {
         this.yearsOfExperience = yearsOfExperience;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
