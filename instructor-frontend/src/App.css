@@ -247,6 +247,7 @@
   border-radius: 6px;
   border: 1px solid #ccc;
   align-self: center;
+  cursor: text;
 }
 
 .search-section button {
@@ -260,3 +261,30 @@
   background-color: #007bff;
   color: white;
 }
+
+.summary {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.toolbar select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar input {
+  flex: 1;
+  min-width: 240px;
+} 
