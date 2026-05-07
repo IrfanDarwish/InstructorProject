@@ -229,6 +229,6 @@
   border-radius: 5px;
 }
 
-.card a:hover {
-  background-color: #0056b3;
+.card:hover {
+  background-color: #6eaef3;
 }
