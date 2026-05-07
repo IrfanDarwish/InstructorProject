@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import './App.css'
+import InstructorList from './components/InstructorList';
 
 function App() {
-  const instructors = [
+  const [instructors, setInstructors] = useState([
     {
       id: "1",
       name: "Alice Johnson",
@@ -24,22 +25,18 @@ function App() {
       status: "INACTIVE",
       yearsOfExperience: 4
       }
-    ];
+  ]); 
+  
+  const handleSelectInstructor = (instructor) => {
+    alert(`Selected Instructor: ${instructor.name}`);
+  };
 
   return (
     <div className='page'>
       <h1>Instructor FrontEnd</h1>
+      <InstructorList instructors={instructors} onSelectInstructor={handleSelectInstructor} />
+      <h3>Total Instructors: {instructors.length}</h3>
 
-      <div className='instructor-list'>
-        {instructors.map(instructor => (
-          <div key={instructor.id} className='card'>
-            <h2>{instructor.name}</h2>
-            <p><strong>Specialization:</strong> {instructor.specialization}</p>
-            <p><strong>Status:</strong> {instructor.status}</p>
-            <p><strong>Experience:</strong> {instructor.yearsOfExperience} years</p>
-          </div>
-        ))}
-      </div>
     </div>
   )
 }
