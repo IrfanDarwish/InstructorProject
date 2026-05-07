@@ -3,6 +3,7 @@ import './App.css'
 import InstructorList from './components/InstructorList';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
   const [instructors, setInstructors] = useState([
     {
       id: "1",
@@ -31,11 +32,24 @@ function App() {
     alert(`Selected Instructor: ${instructor.name}`);
   };
 
+  const filteredInstructors = instructors.filter(instructor =>
+    instructor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className='page'>
       <h1>Instructor FrontEnd</h1>
-      <InstructorList instructors={instructors} onSelectInstructor={handleSelectInstructor} />
-      <h3>Total Instructors: {instructors.length}</h3>
+      <div className="search-section">
+        <input
+          type="text"
+          placeholder="Search instructors..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={() => setSearchTerm("")}>Clear</button>
+      </div>
+      <InstructorList instructors={filteredInstructors} onSelectInstructor={handleSelectInstructor} />
+      <h3>Showing {filteredInstructors.length} of {instructors.length} instructors</h3>
 
     </div>
   )

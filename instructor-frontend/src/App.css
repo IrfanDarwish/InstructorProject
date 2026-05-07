@@ -232,3 +232,31 @@
 .card:hover {
   background-color: #6eaef3;
 }
+
+.search-section {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-section input {
+  padding: 10px;
+  width: 300px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  align-self: center;
+}
+
+.search-section button {
+  padding: 10px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+}
+
+.search-section button:hover {
+  background-color: #007bff;
+  color: white;
+}
