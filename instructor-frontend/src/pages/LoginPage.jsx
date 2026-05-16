@@ -17,6 +17,8 @@ function LoginPage() {
             try {
                 const data = await loginUser(email, password);
                 localStorage.setItem('authToken', data.token);
+                localStorage.setItem('email', data.email);
+                localStorage.setItem('role', data.role);
                 navigate('/dashboard');
             } catch (err) {
                 setError(err.message);
