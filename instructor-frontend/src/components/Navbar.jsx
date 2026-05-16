@@ -20,12 +20,8 @@ function Navbar() {
             <div className="nav-brand">Instructor App</div>
             <div className="nav-links">
                 <Link to="/">Home</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/instructors">Instructors</Link>
                 <Link to="/dashboard">Dashboard</Link>
-                {isAdmin && (
-                    <Link to="/instructors/create">Create Instructor</Link>
-                )}
+                <Link to="/instructors">Instructors</Link>
                 {token ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (

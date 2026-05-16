@@ -7,6 +7,7 @@ function InstructorListPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const role = localStorage.getItem('role');
+    const isAdmin = role === 'ADMIN';
 
 
     useEffect(() => {
@@ -45,11 +46,18 @@ function InstructorListPage() {
 
     return (
         <div className="page">
-            {/* HEADER */}
+            
             <div className="page-header">
                 <div>
                     <h1>Instructor Directory</h1>
                     <p>Manage and view all instructors from your system</p>
+                </div>
+
+                <div className="header-actions">
+                        {isAdmin && (
+                            <Link to="/instructors/create" className="btn">
+                            Create Instructor
+                        </Link>)}
                 </div>
 
                 <div className="header-badge">
@@ -57,7 +65,7 @@ function InstructorListPage() {
                 </div>
             </div>
 
-            {/* EMPTY STATE */}
+            
             {instructor.length === 0 ? (
                 <div className="empty-state">
                     <h2>No instructors found</h2>
@@ -90,7 +98,7 @@ function InstructorListPage() {
                                 <Link to={`/instructors/${inst.id}`} className="btn">
                                     View Details
                                 </Link>
-                                {role === 'ADMIN' && (
+                                {isAdmin && (
                                     <Link to={`/instructors/${inst.id}/edit`} className="btn">
                                         Edit
                                     </Link>

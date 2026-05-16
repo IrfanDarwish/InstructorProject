@@ -130,6 +130,22 @@ a {
   padding: 8px 14px;
   border-radius: 999px;
   font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.header-actions .btn {
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 /* =========================
