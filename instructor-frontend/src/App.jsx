@@ -9,6 +9,8 @@ import NotFoundPage from './pages/NotFoundPage';
 import HomePage from './pages/HomePage';
 import MainLayout from './layouts/MainLayout';
 import ProtectedRoute from './routes/ProtectedRoute';
+import InstructorEditPage from './pages/InstructorEditPage';
+import InstructorCreatePage from './pages/InstructorCreatePage';
 
 function App() {
   // const [searchTerm, setSearchTerm] = useState("");
@@ -98,6 +100,20 @@ function App() {
           </ProtectedRoute>
         } />
 
+        <Route path="/instructors/create"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <InstructorCreatePage />
+            </ProtectedRoute>
+        }/>
+
+        <Route path="/instructors/:id/edit"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <InstructorEditPage />
+            </ProtectedRoute>
+        }/>
+        
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
