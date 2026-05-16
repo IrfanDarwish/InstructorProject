@@ -17,10 +17,15 @@ export async function getInstructorById(instructorId) {
 }
 
 export async function createInstructor(instructor) {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        throw new Error('No token found');
+    }
     const response = await fetch(INSTRUCTOR_API_BASE_URL, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(instructor)
     });
@@ -31,10 +36,12 @@ export async function createInstructor(instructor) {
 }
 
 export async function updateInstructor(id, instructor) {
+    const token = localStorage.getItem('authToken');
     const response = await fetch(`${INSTRUCTOR_API_BASE_URL}/${id}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(instructor)
     });

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { createInstructor } from "../services/instructorAPI";
 import InstructorForm from "../components/InstructorForm";
 
-function CourseCreatePage() {
+function InstructorCreatePage() {
     const navigate = useNavigate();
 
     const [message, setMessage] = useState("");
@@ -27,15 +27,15 @@ function CourseCreatePage() {
 
     return(
         <section>
-            <div classname="page-header">
+            <div className="page-header">
                 <div>
                     <h1>Create Instructor</h1>
                     <p>Add a new instructor to the database</p>
                 </div>
             </div>
 
-            {message && <p classname="success">{message}</p>}
-            {error && <p classname="error">{error}</p>}
+            {message && <p className="success">{message}</p>}
+            {error && <p className="error">{error}</p>}
 
             <InstructorForm 
                 initialData={null}
