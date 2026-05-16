@@ -436,6 +436,22 @@ a {
     background: #1d4ed8;
 }
 
+.cancel-btn {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #ff0000;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cancel-btn:hover {
+    background: #c41111;
+}
+
 .error {
     color: #dc2626;
     font-size: 14px;

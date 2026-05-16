@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 function InstructorForm({ initialData, onSubmit, buttonText }) {
     const navigate = useNavigate();
@@ -174,6 +174,10 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
 
                 <button type="submit" className="submit-btn">
                     {buttonText}
+                </button>
+
+                <button type="button" className="cancel-btn" onClick={() => navigate('/instructors')}>
+                    Cancel
                 </button>
             </form>
         </div>
