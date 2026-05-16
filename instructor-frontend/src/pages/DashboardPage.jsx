@@ -1,0 +1,10 @@
+function DashboardPage() {
+    return (
+        <div>
+        <h1>Dashboard</h1>
+        <p>This is the dashboard page of the Instructor API frontend application.</p>
+        </div>
+    );
+}
+
+export default DashboardPage;
