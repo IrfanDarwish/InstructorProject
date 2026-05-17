@@ -70,7 +70,9 @@ function InstructorListPage() {
     }, [currentPage, totalPages]);
 
     async function handleDeleteInstructor(instructorId) {
-        const confirmDelete = window.confirm(`Are you sure you want to delete "${instructors.name}" as instructor?`);
+        const instructorToDelete = instructors.find((instructor) => instructor.id === instructorId);
+        
+        const confirmDelete = window.confirm(`Are you sure you want to delete "${instructorToDelete?.name}" as instructor?`);
         if (!confirmDelete) {
             return;
         }
