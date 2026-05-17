@@ -7,7 +7,7 @@ function SearchBox({ searchTerm, onSearchChange, resultCount, totalCount}) {
                 <button type="button" onClick={() => onSearchChange('')}>Clear</button>
             )}
 
-            <p>Shoiwing {resultCount} of {totalCount} results</p>
+            <p>Showing {resultCount} of {totalCount} results</p>
         </div>
     )
 }

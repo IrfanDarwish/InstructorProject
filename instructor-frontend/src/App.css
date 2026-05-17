@@ -243,15 +243,16 @@ a {
    BUTTONS
 ========================= */
 .btn {
-  display: inline-block;
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 10px 14px;
   border-radius: 10px;
   background: var(--primary);
   color: white;
-  text-decoration: none;
-  border: none;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .btn:hover {
@@ -461,4 +462,101 @@ a {
     color: green;
     margin: 10px 0;
     font-weight: 500;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 20px auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-box input {
+    width: 100%;
+
+    padding: 16px 20px;   
+    font-size: 16px;
+
+    border-radius: 999px; 
+    border: 1px solid var(--border);
+
+    background: white;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.search-box input:focus {
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.pagination {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 30px auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.pagination button {
+    padding: 10px 16px;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    background: var(--panel);
+    color: var(--text);
+
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    font-size: 14px;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 14px;
+    color: var(--muted);
+
+    padding: 0 8px;
+}
+
+.pagination select {
+    padding: 10px 14px;
+
+    border-radius: 999px;
+
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+
+    cursor: pointer;
+    outline: none;
+
+    font-size: 14px;
+}
+
+.pagination button:hover:not(:disabled) {
+    transform: translateY(-1px);
 }

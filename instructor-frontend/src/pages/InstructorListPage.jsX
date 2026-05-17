@@ -1,13 +1,48 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getAllInstructors } from '../services/instructorAPI';
+import { useEffect, useState, useMemo } from 'react';
+
+import { getAllInstructors, deleteInstructor } from '../services/instructorAPI';
+
+import InstructorCard from '../components/InstructorCard';
+import Pagination from '../components/Pagination';
+import SearchBox from '../components/SearchBox';
 
 function InstructorListPage() {
-    const [instructor, setInstructor] = useState([]);
+    const [instructors, setInstructor] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
+
     const role = localStorage.getItem('role');
     const isAdmin = role === 'ADMIN';
+
+    const filteredInstructors = useMemo(() => {
+        const keyword = searchTerm.toLowerCase();
+
+        if(!keyword){
+            return instructors;
+        }
+
+        return instructors.filter((instructor) => {
+            return (
+                instructor.name.toLowerCase().includes(keyword) ||
+                instructor.specialization.toLowerCase().includes(keyword) ||
+                instructor.status.toLowerCase().includes(keyword)
+            );
+        });
+    }, [instructors, searchTerm]);
+
+    const totalPages = Math.ceil(filteredInstructors.length / pageSize) || 1;
+
+    const paginatedInstructors = useMemo(() => {
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        return filteredInstructors.slice(startIndex, endIndex);
+    }, [filteredInstructors, currentPage, pageSize]);
 
 
     useEffect(() => {
@@ -23,6 +58,33 @@ function InstructorListPage() {
         }
         loadInstructor();
     }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, pageSize]);
+
+    useEffect(() => {
+        if(currentPage > totalPages) {
+            setCurrentPage(totalPages);
+        };
+    }, [currentPage, totalPages]);
+
+    async function handleDeleteInstructor(instructorId) {
+        const confirmDelete = window.confirm(`Are you sure you want to delete "${instructors.name}" as instructor?`);
+        if (!confirmDelete) {
+            return;
+        }
+
+        setError('');
+        setSuccessMessage('');
+        try {
+            await deleteInstructor(instructorId);
+            setInstructor(instructors.filter((instructor) => instructor.id !== instructorId));
+        } catch (err) {
+            console.log("❌ Delete failed:", err.response?.data || err.message);
+            setError("Failed to delete instructor. Please try again later.");
+        }
+    }
 
     if (loading) {
         return (
@@ -43,6 +105,7 @@ function InstructorListPage() {
             </div>
         );
     }
+    
 
     return (
         <div className="page">
@@ -60,53 +123,53 @@ function InstructorListPage() {
                         </Link>)}
                 </div>
 
-                <div className="header-badge">
-                    Total: {instructor.length}
-                </div>
-            </div>
+                {successMessage && (
+                    <div className="success-message">
+                        {successMessage}
+                    </div>
+                )}
 
+                {error && (
+                    <div className="error-message">
+                        {error}
+                    </div>
+                )}
+
+                <SearchBox
+                    searchTerm={searchTerm}
+                    onSearchChange={setSearchTerm}
+                    resultCount={filteredInstructors.length}
+                    totalCount={instructors.length}
+                />
+            </div>
             
-            {instructor.length === 0 ? (
+            {instructors.length === 0 ? (
                 <div className="empty-state">
                     <h2>No instructors found</h2>
                     <p>Start by adding a new instructor to your system.</p>
                     <Link to="/dashboard" className="btn">Go to Dashboard</Link>
                 </div>
             ) : (
-                <div className="card-grid">
-                    {instructor.map((inst) => (
-                        <div className="card" key={inst.id}>
-                            <div className="card-top">
-                                <div className="avatar">
-                                    {inst.name?.charAt(0).toUpperCase()}
-                                </div>
+                <>
+                    <div className="card-grid">
+                        {paginatedInstructors.map((instructor) => (
+                            <InstructorCard 
+                                key={instructor.id}
+                                instructor={instructor}
+                                isAdmin={isAdmin}
+                                onDelete={handleDeleteInstructor}
+                            />
+                        ))}
+                    </div>
 
-                                <div>
-                                    <h2>{inst.name}</h2>
-                                    <span className={`status ${inst.status?.toLowerCase()}`}>
-                                        {inst.status}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="card-body">
-                                <p><strong>Specialization:</strong> {inst.specialization}</p>
-                                <p><strong>Experience:</strong> {inst.yearsOfExperience} years</p>
-                            </div>
-
-                            <div className="card-actions">
-                                <Link to={`/instructors/${inst.id}`} className="btn">
-                                    View Details
-                                </Link>
-                                {isAdmin && (
-                                    <Link to={`/instructors/${inst.id}/edit`} className="btn">
-                                        Edit
-                                    </Link>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                    <Pagination 
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        pageSize={pageSize}
+                        onPageChange={setCurrentPage}
+                        onPageSizeChange={setPageSize}
+                    />
+                </>
             )}
         </div>
     );

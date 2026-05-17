@@ -64,5 +64,5 @@ export async function deleteInstructor(id) {
     if (!response.ok) {
         throw new Error(`Failed to delete instructor: ${response.statusText}`);
     }
-    return await response.json();
+    return;
 }
