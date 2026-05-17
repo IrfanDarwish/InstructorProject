@@ -1,19 +1,42 @@
-function InstructorCard({ instructor, onSelect }) {
+import { Link } from "react-router-dom";
+
+function InstructorCard({ instructor, isAdmin, onDelete }) {
     return (
-        <div className="card" onClick={() => onSelect(instructor)}>
-            <h2>{instructor.name}</h2>
+        <div className="card">
+            <div className="card-top">
+                <div className="avatar">
+                    {instructor.name?.charAt(0).toUpperCase()   }
+                </div>
 
-            <p>
-                <strong>Specialization:</strong> {instructor.specialization}
-            </p>
+                <div>
+                    <h2>{instructor.name}</h2>
+                    <span className={`status ${instructor.status?.toLowerCase()}`}>
+                        {instructor.status}
+                    </span>
+                </div>
+            </div>
 
-            <p>
-                <strong>Status:</strong> {instructor.status}
-            </p>
+            <div className="card-body">
+                <p><strong>Specialization:</strong> {instructor.specialization}</p>
+                <p><strong>Experience:</strong> {instructor.yearsOfExperience} years</p>
+            </div>
 
-            <p>
-                <strong>Experience:</strong> {instructor.yearsOfExperience} years
-            </p>
+            <div className="card-actions">
+                <Link to={`/instructors/${instructor.id}`} className="btn">
+                    View Details
+                </Link>
+                {isAdmin && (
+                    <>
+                        <Link to={`/instructors/${instructor.id}/edit`} className="btn">
+                            Edit
+                        </Link>
+                        <button className='btn'
+                            onClick={() => onDelete(instructor.id)}>
+                            Delete
+                        </button>
+                    </>
+                )}
+            </div>
         </div>
     );
 }
