@@ -52,8 +52,14 @@ export async function updateInstructor(id, instructor) {
 }
 
 export async function deleteInstructor(id) {
+    const token = localStorage.getItem('authToken');
     const response = await fetch(`${INSTRUCTOR_API_BASE_URL}/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+
     });
     if (!response.ok) {
         throw new Error(`Failed to delete instructor: ${response.statusText}`);
