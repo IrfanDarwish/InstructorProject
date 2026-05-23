@@ -7,7 +7,7 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
         name: '',
         email: '',
         specialization: '',
-        yearsOfExperience: 0,
+        yearsOfExperience: '',
         status: ''
     });
 
@@ -51,7 +51,7 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
             newErrors.specialization = 'Specialization is required';
         }
 
-        if (Number(formData.yearsOfExperience) <= 0) {
+        if (formData.yearsOfExperience === '' || Number(formData.yearsOfExperience) <= 0) {
             newErrors.yearsOfExperience = 'Years of experience must be at least 1';
         }
 
@@ -72,7 +72,13 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
         event.preventDefault();
 
         if (validateForm()) {
-            onSubmit(formData);
+            onSubmit({
+                name: formData.name,
+                email: formData.email,
+                specialization: formData.specialization,
+                yearsOfExperience: Number(formData.yearsOfExperience),
+                status: formData.status
+            });
         }
     }
     
@@ -142,7 +148,7 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
                         name="yearsOfExperience"
                         placeholder="0"
                         min="0"
-                        value={formData.yearsOfExperience || ""}
+                        value={formData.yearsOfExperience}
                         onChange={handleChange}
                     />
 
