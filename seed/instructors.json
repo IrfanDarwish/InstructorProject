@@ -1,0 +1,72 @@
+[
+    {
+        "name": "John Doe",
+        "email": "Bt3wH@example.com",
+        "specialization": "Mathematics",
+        "yearsOfExperience": 5,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Jane Smith",
+        "email": "Bt3wH@example.com",
+        "specialization": "Physics",
+        "yearsOfExperience": 8,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Emily Johnson",
+        "email": "Bt3wH@example.com",
+        "specialization": "Chemistry",
+        "yearsOfExperience": 6,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Michael Brown",
+        "email": "Bt3wH@example.com",
+        "specialization": "Biology",
+        "yearsOfExperience": 7,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Sarah Davis",
+        "email": "Bt3wH@example.com",
+        "specialization": "Computer Science",
+        "yearsOfExperience": 9,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "David Wilson",
+        "email": "Bt3wH@example.com",
+        "specialization": "Physics",
+        "yearsOfExperience": 8,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Laura Martinez",
+        "email": "Bt3wH@example.com",
+        "specialization": "Chemistry",
+        "yearsOfExperience": 6,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Robert Taylor",
+        "email": "Bt3wH@example.com",
+        "specialization": "Biology",
+        "yearsOfExperience": 7,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "Emily Anderson",
+        "email": "Bt3wH@example.com",
+        "specialization": "Computer Science",
+        "yearsOfExperience": 9,
+        "status": "ACTIVE"
+    },
+    {
+        "name": "James Thomas",
+        "email": "Bt3wH@example.com",
+        "specialization": "Physics",
+        "yearsOfExperience": 8,
+        "status": "ACTIVE"
+    }
+]
