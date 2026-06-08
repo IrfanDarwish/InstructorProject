@@ -13,7 +13,10 @@ public class DataSeeder implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public DataSeeder(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataSeeder(
+        UserRepository userRepository,
+        PasswordEncoder passwordEncoder
+    ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -31,7 +34,7 @@ public class DataSeeder implements CommandLineRunner {
         }
 
         User admin = new User(
-            "admin",
+            "Admin User",
             adminEmail,
             passwordEncoder.encode("password123"),
             Role.ADMIN
